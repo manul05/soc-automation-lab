@@ -1,0 +1,24 @@
+<!--
+  Custom Wazuh detection rule(s) for the SOC Automation Lab.
+
+  Install: append this <group> to /var/ossec/etc/rules/local_rules.xml on the Wazuh manager
+  (do NOT replace the file; it already contains the default local rules), then restart:
+      sudo systemctl restart wazuh-manager
+
+  Custom rule IDs must be 100000 or higher to avoid clashing with the stock ruleset.
+-->
+<group name="local,sysmon,credential_access,">
+
+  <!-- Mimikatz execution (Sysmon Event ID 1, process creation).
+       Matches on OriginalFileName from the PE header, so renaming the .exe does not evade it.
+       Parent group sysmon_event1 = Sysmon process-creation events decoded by Wazuh. -->
+  <rule id="100002" level="15">
+    <if_group>sysmon_event1</if_group>
+    <field name="win.eventdata.originalFileName" type="pcre2">(?i)mimikatz\.exe</field>
+    <description>Mimikatz Usage Detected</description>
+    <mitre>
+      <id>T1003</id>
+    </mitre>
+  </rule>
+
+</group>

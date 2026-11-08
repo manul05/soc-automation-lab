@@ -1,0 +1,21 @@
+# Secrets and credentials (never commit these)
+.env
+*.key
+*.pem
+*.ppk
+*password*
+*secret*
+wazuh-install-files.tar
+wazuh-passwords.txt
+
+# Private notes and generator scripts
+Personal_Notes/
+scratch/
+*.local.md
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/

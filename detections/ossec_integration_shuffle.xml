@@ -1,0 +1,14 @@
+<!--
+  Wazuh -> Shuffle integration block.
+  Add inside <ossec_config> in /var/ossec/etc/ossec.conf on the Wazuh manager, then:
+      sudo systemctl restart wazuh-manager
+
+  Replace the placeholder with your own webhook URI. NEVER commit the real URI:
+  anyone holding it can trigger your workflow.
+-->
+<integration>
+  <name>shuffle</name>
+  <hook_url>YOUR_SHUFFLE_WEBHOOK_URI</hook_url>
+  <rule_id>100002</rule_id>
+  <alert_format>json</alert_format>
+</integration>
